@@ -26,47 +26,11 @@ SOFTWARE.
 #include <vector>
 #include <stack>
 #include <queue>
+#include "graph_adj_list.h"
 
 using namespace std;
 
-struct graph
-{
-    int n;
-    vector<vector<int>> l;
-        
-    graph(int n)
-    {
-        this->n =n;
-        this->l.resize(this->n);
-    }
-
-    void add_edge(int i, int j)
-    {
-        if (i >= this->n || j >= this->n || i < 0 || j < 0)
-        {
-            cout << "Edge not valid : " << i << " " << j << endl;
-            return;
-        }
-        
-        this->l[i].push_back(j);
-        this->l[j].push_back(i);
-    }
-
-    void display_graph()
-    {
-        for (int i = 0; i < this->n; i++)
-        {
-            cout << "Node " << i << " -> ";
-            for(int x : this->l[i])
-            {
-                cout << x << ", ";
-            }
-            cout << endl;
-        }
-    }
-};
-
-bool DFS(graph g, int s, int t)
+bool DFS(graph_adj_l g, int s, int t)
 {
     vector<bool> visited(g.n, false);
     stack<int> n_next;
@@ -93,7 +57,7 @@ bool DFS(graph g, int s, int t)
     return false;
 } /* Complexity : O(|V| + |E|) with |V| the number of node in the graph and |E| the number of edge*/
 
-bool BFS(graph g, int s, int t)
+bool BFS(graph_adj_l g, int s, int t)
 {
     vector<bool> visited(g.n, false);
     queue<int> n_next;
@@ -120,7 +84,7 @@ bool BFS(graph g, int s, int t)
     return false;
 } /* Complexity : O(|V| + |E|) with |V| the number of node in the graph and |E| the number of edge*/
 
-vector<bool> BFS_connex(graph g, int s)
+vector<bool> BFS_connex(graph_adj_l g, int s)
 {
     vector<bool> visited(g.n, false);
     queue<int> n_next;
@@ -145,7 +109,7 @@ vector<bool> BFS_connex(graph g, int s)
     return visited;
 }
 
-vector<vector<bool>> get_components(graph g)
+vector<vector<bool>> get_components(graph_adj_l g)
 {
     vector<vector<bool>> components;
     vector<bool> visited(g.n, false);
@@ -172,7 +136,7 @@ int main()
     int size, nb_edge;
     cin >> size >> nb_edge;
 
-    graph G = graph(size);
+    graph_adj_l G = graph_adj_l(size);
 
     for (int k = 0; k < nb_edge; k++)
     {
