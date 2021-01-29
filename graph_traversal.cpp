@@ -30,7 +30,7 @@ SOFTWARE.
 
 using namespace std;
 
-bool DFS(graph_adj_l g, int s, int t)
+bool DFS(graph_unweight_adj_l g, int s, int t)
 {
     vector<bool> visited(g.n, false);
     stack<int> n_next;
@@ -40,12 +40,11 @@ bool DFS(graph_adj_l g, int s, int t)
 
     while (!n_next.empty())
     {
-        int x = n_next.top();
-        n_next.pop();
+        int x = n_next.top(); n_next.pop();        
 
         if(x == t) { return true; }
 
-        for(int v : g.l[x])
+        for(int v : g.adj_l[x])
         {
             if (visited[v] == false)
             {
@@ -55,9 +54,9 @@ bool DFS(graph_adj_l g, int s, int t)
         }
     }
     return false;
-} /* Complexity : O(|V| + |E|) with |V| the number of node in the graph and |E| the number of edge*/
+} /* Time Complexity : O(|V| + |E|) with |V| the number of node in the graph and |E| the number of edge*/
 
-bool BFS(graph_adj_l g, int s, int t)
+bool BFS(graph_unweight_adj_l g, int s, int t)
 {
     vector<bool> visited(g.n, false);
     queue<int> n_next;
@@ -67,12 +66,11 @@ bool BFS(graph_adj_l g, int s, int t)
 
     while (!n_next.empty())
     {
-        int x = n_next.front();
-        n_next.pop();
+        int x = n_next.front(); n_next.pop();        
 
         if(x == t) { return true; }
 
-        for(int v : g.l[x])
+        for(int v : g.adj_l[x])
         {
             if (visited[v] == false)
             {
@@ -82,9 +80,9 @@ bool BFS(graph_adj_l g, int s, int t)
         }
     }
     return false;
-} /* Complexity : O(|V| + |E|) with |V| the number of node in the graph and |E| the number of edge*/
+} /* Time Complexity : O(|V| + |E|) with |V| the number of node in the graph and |E| the number of edge*/
 
-vector<bool> BFS_connex(graph_adj_l g, int s)
+vector<bool> BFS_connex(graph_unweight_adj_l g, int s)
 {
     vector<bool> visited(g.n, false);
     queue<int> n_next;
@@ -94,10 +92,10 @@ vector<bool> BFS_connex(graph_adj_l g, int s)
 
     while (!n_next.empty())
     {
-        int x = n_next.front();
-        n_next.pop();
+        int x = n_next.front(); n_next.pop();
 
-        for(int v : g.l[x])
+
+        for(int v : g.adj_l[x])
         {
             if (visited[v] == false)
             {
@@ -109,7 +107,7 @@ vector<bool> BFS_connex(graph_adj_l g, int s)
     return visited;
 }
 
-vector<vector<bool>> get_components(graph_adj_l g)
+vector<vector<bool>> get_components(graph_unweight_adj_l g)
 {
     vector<vector<bool>> components;
     vector<bool> visited(g.n, false);
@@ -126,7 +124,7 @@ vector<vector<bool>> get_components(graph_adj_l g)
         }
     }
     return components;
-} /* Complexity : O(|E|) with |E| the number of edge*/
+} /* Time Complexity : O(|E|) with |E| the number of edge*/
 
 int main()
 {
@@ -136,7 +134,7 @@ int main()
     int size, nb_edge;
     cin >> size >> nb_edge;
 
-    graph_adj_l G = graph_adj_l(size);
+    graph_unweight_adj_l G = graph_unweight_adj_l(size);
 
     for (int k = 0; k < nb_edge; k++)
     {
