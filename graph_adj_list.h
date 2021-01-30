@@ -12,6 +12,7 @@ struct graph_unweight_adj_l
 
     int n;
     std::vector<std::vector<int>> adj_l;
+    std::vector<std::tuple<int, int>> edges;
         
     void add_edge(int , int);
     void display_graph();
@@ -20,6 +21,18 @@ struct graph_unweight_adj_l
 struct graph_weight_adj_l
 {
     graph_weight_adj_l(int);
+
+    int n;
+    std::vector<std::vector<std::tuple<int, int>>> adj_l;
+    std::vector<std::tuple<int, int, int>> edges;
+        
+    void add_edge(int , int, int);
+    void display_graph();
+};
+
+struct digraph_weight_adj_l
+{
+    digraph_weight_adj_l(int);
 
     int n;
     std::vector<std::vector<std::tuple<int, int>>> adj_l;

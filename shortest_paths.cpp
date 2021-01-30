@@ -32,7 +32,7 @@ SOFTWARE.
 
 using namespace std;
 
-tuple<vector<int>, vector<int>> dijkstra(graph_weight_adj_l g, int s)
+tuple<vector<int>, vector<int>> dijkstra(digraph_weight_adj_l g, int s)
 {
     vector<int> parent(g.n, -1);
     vector<int> distance(g.n, INT_MAX);
@@ -72,7 +72,7 @@ tuple<vector<int>, vector<int>> dijkstra(graph_weight_adj_l g, int s)
     return make_tuple(parent, distance);
 } /* Time Complexity : O(|E| + |V| * ln(|V|)) with |V| the number of node in the graph and |E| the number of edge */
 
-tuple<vector<int>, vector<int>> bellman_ford(graph_weight_adj_l g, int s)
+tuple<vector<int>, vector<int>> bellman_ford(digraph_weight_adj_l g, int s)
 {
     vector<int> distance(g.n, INT_MAX);
     vector<int> parent(g.n, -1);
@@ -125,7 +125,7 @@ int main()
     int size, nb_edge;
     cin >> size >> nb_edge;
 
-    graph_weight_adj_l G = graph_weight_adj_l(size);
+    digraph_weight_adj_l G = digraph_weight_adj_l(size);
 
     for (int l = 0; l < nb_edge; l++)
     {
